@@ -56,6 +56,7 @@ at ***https://<app>.herokuapp.com/***
 | Docker push to Docker Hub | docker push nitesh009/spring-boot-app |
 | Docker tagging before push | docker tag 6eef95e7abf4 nitesh009/spring-boot-app:initials |
 | Deployed App URL on Heroku| https://nk-spring-boot-app.herokuapp.com/ |
+| Docker Hub Deployed Image URL| https://hub.docker.com/r/nitesh009/spring-boot-app/ |
 
 
 ---
