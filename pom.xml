@@ -22,6 +22,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<failOnNoGitDirectory>false</failOnNoGitDirectory>
+		<failOnUnableToExtractRepoInfo>false</failOnUnableToExtractRepoInfo>
 	</properties>
 
 	<dependencies>
@@ -86,7 +88,6 @@
 	</dependencies>
 
 	<build>
-		<finalName>spring-boot-app</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -160,6 +161,7 @@
 									</limits>
 								</rule>
 							</rules>
+								<skip>true</skip>
 						</configuration>
 					</execution>
 				</executions>
@@ -179,23 +181,6 @@
 						<goals>
 							<goal>integration-test</goal>
 						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-install-plugin</artifactId>
-				<executions>
-					<execution>
-						<goals>
-							<goal>install-file</goal>
-						</goals>
-						<phase>install</phase>
-						<configuration>
-							<file>${project.build.finalName}.${project.packaging}</file>
-							<generatePom>false</generatePom>
-							<pomFile>pom.xml</pomFile>
-						</configuration>
 					</execution>
 				</executions>
 			</plugin>

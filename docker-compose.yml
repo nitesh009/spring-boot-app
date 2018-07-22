@@ -1,6 +1,6 @@
 version: '2'
 services:
-  freelancerkit:
+  springbootapp:
     build: .
     ports:
       - "18080:8080"
