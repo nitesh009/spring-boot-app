@@ -7,10 +7,10 @@ Code Quality checks using SonarCloud, build Docker image and push it to DockerHu
 
 --- 
 
-So I thought of checking can I use Travis CI for my projects to do all the usual tasks such as:
+I have used Travis CI for this project to do all the usual tasks such as:
 
 * Checkout the latest code
-* Compile and run Unit and Integration Tests
+* Compile and run Junit and Integration Tests
 * Run JaCoCo code coverage and fail the build if desired percentage is not met
 * Run SonarQube code quality checks
 * Optionally, built Docker image and publish it to Docker Hub
