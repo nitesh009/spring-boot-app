@@ -1,2 +1,40 @@
+sudo: required
 language: java
 jdk: oraclejdk8
+services:
+- docker
+env:
+  global:
+  - secure: "dH9jCl/0tCzQaDbMnIqCsLIDh5P3k1e6Y1qOnaIkgTma2bSQ4Ph1O8F0SNPN4c+Wpn71IM8L/29L11qh9odGahxJb6jl4uJFeOEi9kxqjp8EMFClnjKhgBQ4b3pfb/J1TKDAGZm8h8UgBBXhmk4iRjk+bYhaGLBtZWOlf+/vZMWE8luG0P9ype2hyfqSmNQTrjygFG2bp15QfMDZZ4ORvrekHn7N0fm+F1YgXMzZDB0aUmLnI8NpcGfgucGojPyWqpDIAcxZ7gDwv92NJNZEQ3NLgNAkEzLoO7WwzQd9To+z5bCoDy00anEkIdARYmIslQgWt1sUR4XfeoMalJu2v/i9u4FHjfBnma52BYWo4ExpRu/l8ulcXGL2ynjPn2noMAs2K+WT2CSXWqGowOWKz9JgO32Xd6EFQqTSS49WomzmO4FVHkuH/zzNS3kuImHmm1qno8tgrcSTchF80AZtNBjPU8E/ka7edwSw0+jU47mrbRoxavJwpq35L2FQaQld/aDjnxybjlz3hY11vRLQOXA1f/vQcdp9dkqEwMgHVIh5LU7GaQ3TYAND3iQoWSmBpCrbcbOvP6D2OAHz8VRhOnJQlnH6NxreJgwshAUMGooKMSz5sRsFUK6blVz9U8ysf1Ecp1zbqxRsCiDj1jyGxdiZMl81ihrTwpJrNThG+2o="
+  - secure: "G9tzUuGsxN2bN4N572jTYiV47VlgxVfOxtUh0KswOA7HKg1vcLgfnqtFOjpWlaCuTSjXrf5UDSYTaY95bgp3dGBS4grELQeoft/33Vlln0DSkPe8n0IYiqNYZKCK0LGSZhJCfZv3K1KowsNAWdB9HpHBiN9olHZ6gZPvqTPE2ensB8m4DjgmquG5AEpTccn8k6WFCSaCyPEd1YGAqnYw/18rkTwaW1CoS0FYn38vJi3efooEciTJwmtL8Ph3OBzX/SiSWGoSgEDqJFrX/B+s3lUr0bsMsSwt/Y4eGfKylwvdEKeqhQQ2RZ8a8n0vaUC5jo9sQ0hl6HWj0z/yrTCWjY30FbwUwsnsQ5KuPz5jiuj/eyp16VUvIzgfVQGD53nXN7EUtWeaqE5n9YMoRlmS287ZIKjTdzjvXQNQrqG3iRIK6J8KbxhVm69EGF7Bw6f0PgPtwjcXpWiCB5KR5DCO57zhKsQ2m8Y1G3ljUQ3GqocGsmxyJYEcdnI73SdYDjBEPL1RJRoh2Ur63sSEkcT7CGUfOnjMt47UMLIDAK9QFe4uHSPUkCxwzJ8QmZ9LQuEi1/b7Psq2RF+FqRQ3IqkTRrcKdYe3qh15EoCUDHTqr+ZBuXIefv4Omg65iONyUd/YPNZYD6mnI3PlGiR/Zx3gXrj7qiQSckaWJV3k3aiuElo="
+  - secure: "yDZB2bvGlS42hxWQX1rj1GaB5g+AXWf/Z7KU2URBXZKB3OCJBzXY5zn7l1pUFSV32Yae8zBbw0oM4CXn7WuhVNOJNMu8qSZlN7Sg4inNHiYIcHq1VQqTVUBwS9gUD6kvUVHLr1MQeDXX+sNFM6qRaDBg1pAfljpnqq7TEnbw2W92yCdNbsWtxNa8lgjjArb8Ki69EDek27REn3/sQ5z1MqDqDtsCRpddYwf85mG2FVCebyOFogTVh7Q2zlr3SOa/pX+u/rWlj+UxLva6cAn0hxMvS4hhf7/Yui79oPiYTYKC5/aW84+HaQM66QbLSS4WlTNWbK/ezSaislEVDHV3PSV9Q2Kg3RdKiFBMiCQvCTEryrFxkiMqtnp2vpeRSarpF4tyu7WqPPPZAb27fXNbeXXe1qNWnhROJQsrvM8sqDAr7YTeJBJmft+puOWnWIhSf/osjIK8iZ5H2nW9WI1psNVIvozCk+mLrQpXeTssrrItPQw4a9GRysvw/EzHDQYlT3i26DG1+donQWNmH7URBKKadiQ9GELZ2GVao4C7EeGl2Zgj3/08cNLwSkSNdE62kLj4jGrjv7DbD94ai2K1gyhHxlMeizhlvmbvYJP0jiWJIwzj0iJ7vwX5iRbh3jEKSpA2UrjKqBRIxJOy7Q/fw47RQgRoOwMaXvWlkvL8nBM="
+
+addons:
+  sonarcloud:
+    organization: "nitesh009-github"
+    token:
+      secure: $SONAR_TOKEN
+
+script:
+- ./mvnw clean install -B
+- ./mvnw clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
+
+
+cache:
+  directories:
+  - '$HOME/.m2/repository'
+  - '$HOME/.sonar/cache'
+
+after_success:
+- docker login -u $DOCKER_USER -p $DOCKER_PASS
+- export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH
+  ; fi`
+- export IMAGE_NAME=nitesh009/spring-boot-app
+- docker build -t $IMAGE_NAME:$COMMIT .
+- docker tag $IMAGE_NAME:$COMMIT $IMAGE_NAME:$TAG
+- docker push $IMAGE_NAME
+
+deploy:
+  provider: heroku
+  api_key: $HEROKU_API_KEY
+  app: nk-spring-boot-app
