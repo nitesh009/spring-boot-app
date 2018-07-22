@@ -7,6 +7,8 @@ Code Quality checks using SonarCloud, build Docker image and push it to DockerHu
 
 --- 
 
+[![Build Status](https://travis-ci.org/nitesh009/spring-boot-app.svg)](https://travis-ci.org/nitesh009/spring-boot-app)
+
 I have used Travis CI for this project to do all the usual tasks such as:
 
 * Checkout the latest code
