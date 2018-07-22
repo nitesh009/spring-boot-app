@@ -5,6 +5,7 @@ In this article we are going to learn how we can use Travis CI for Continuous In
 of a SpringBoot application. We will learn how to run maven build goals, perform test coverage validation using JaCoCo plugin,
 Code Quality checks using SonarCloud, build Docker image and push it to DockerHub and finally deploy it to Heroku.
 
+--- 
 
 So I thought of checking can I use Travis CI for my projects to do all the usual tasks such as:
 
@@ -15,6 +16,7 @@ So I thought of checking can I use Travis CI for my projects to do all the usual
 * Optionally, built Docker image and publish it to Docker Hub
 * Deploy application on some free cloud hosting service like Heroku or OpenShift
 
+---
 
 I have used below open source stack for performing all operations-
 * GitHub for code repository
@@ -22,6 +24,7 @@ I have used below open source stack for performing all operations-
 * Docker Hub for publishing Docker images
 * Heroku for deploying the application
 
+---
 Let us see how we can do all the above mentioned tasks using Travis-CI for a SpringBoot project.
 
 > Steps Involved 
